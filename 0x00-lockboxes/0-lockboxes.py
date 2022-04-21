@@ -8,7 +8,7 @@ def canUnlockAll(boxes):
     """
         Return True if ALL boxes can be opened, else return False.
     """
-     unlocked_boxes_index = [0]
+    unlocked_boxes_index = [0]
     for idx in range(len(boxes)):
         if idx in unlocked_boxes_index:
             for j in boxes[idx]:
