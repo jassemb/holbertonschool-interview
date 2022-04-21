@@ -1,4 +1,4 @@
-#!/usr/bin/python3pep
+#!/usr/bin/python3
 def canUnlockAll(boxes):
     unlocked = [0]
     for box_id, box in enumerate(boxes):
