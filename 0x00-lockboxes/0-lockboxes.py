@@ -3,6 +3,7 @@
     Method that determines if all the boxes can be opened.
 """
 
+
 def canUnlockAll(boxes):
     """
         Return True if ALL boxes can be opened, else return False.
@@ -15,5 +16,4 @@ def canUnlockAll(boxes):
         for key in boxes[box]:
             if key not in visted:
                 stack.append(key)
-    return len(visted)==len(boxes)
-
+    return len(visted) == len(boxes)
