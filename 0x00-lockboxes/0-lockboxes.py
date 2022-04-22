@@ -8,12 +8,19 @@ def canUnlockAll(boxes):
     """
         Return True if ALL boxes can be opened, else return False.
     """
-    visted = set()
+    unlocked_boxes_index = [0]
 
-    def dfs(boxe):
-        visted.add(boxe)
-        for i in boxes[boxe]:
-            if i not in visted:
-                dfs(i)
-    dfs(0)
-    return len(visted) == len(boxes)
+    for idx in range(len(boxes)):
+        if idx in unlocked_boxes_index:
+            for j in boxes[idx]:
+                unlocked_boxes_index.append(j)
+                if j < len(boxes):
+                    if boxes[j] != [] and type(boxes[j]) == list:
+                        unlocked_boxes_index.extend(boxes[j])
+                    if boxes[j] is None:
+                        return False
+                    if type(boxes[j]) == int:
+                        unlocked_boxes_index.append(boxes[j])
+        else:
+            return False
+    return True
