@@ -9,11 +9,11 @@ def canUnlockAll(boxes):
         Return True if ALL boxes can be opened, else return False.
     """
     visted = set()
-    stack = [0]
-    while stack:
-        box = stack.pop()
-        visted.add(box)
-        for key in boxes[box]:
-            if key not in visted:
-                stack.append(key)
+
+    def dfs(boxe):
+        visted.add(boxe)
+        for i in boxes[boxe]:
+            if i not in visted:
+                dfs(i)
+    dfs(0)
     return len(visted) == len(boxes)
