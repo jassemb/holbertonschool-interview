@@ -100,6 +100,10 @@ void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 						grid1[x][y + 1] += 1;
 				}
 			}
-
+		type = verif(grid1);
+		if (type == 1)
+			break;
+		printf("=\n");
+		print_grid(grid1);
 	}
 }
