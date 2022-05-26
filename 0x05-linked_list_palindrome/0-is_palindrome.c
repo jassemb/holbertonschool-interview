@@ -1,5 +1,6 @@
 #include "lists.h"
 #include <stdio.h>
+#include <stdlib.h>
 /**
  *  reverseList - will reverse the singly linked
  * @temp: pointer to pointer of first node of listint_t list
