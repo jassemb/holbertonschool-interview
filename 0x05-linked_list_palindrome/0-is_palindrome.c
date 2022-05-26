@@ -57,11 +57,14 @@ int is_palindrome(listint_t **head)
 			{
 				first_start = first_start->next;
 				second_start = second_start->next;
+				free(second_start);
 			}
 			else
 			{
 				return (0);
 			}
 		}
+		free(q);
+		free(p);
 		return (1);
 }
