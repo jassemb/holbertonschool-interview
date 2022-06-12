@@ -1,4 +1,4 @@
-#include "lists.h"
+v#include "lists.h"
 
 
 /**
@@ -9,21 +9,21 @@
 
 int check_cycle(listint_t *list)
 {
-	listint_t *step1;
-	listint_t *step2;
+	listint_t *turtle;
+	listint_t *rabbit;
 
 	if (list == NULL)
 		return (0);
 
-	step2 = list;
-	step1 = list->next;
+	turtle = list;
+	rabbit = list->next;
 
-	while (step1 != NULL && step2 != NULL && step2->next != NULL)
+	while (turtle != NULL && rabbit != NULL && rabbit->next != NULL)
 	{
-		if (step1 == step2)
+		if (turtle == rabbit)
 			return (1);
-		step1 = step1->next;
-		step2 = step2->next->next;
+		turtle = turtle->next;
+		rabbit = rabbit->next->next;
 	}
 	return (0);
 }
