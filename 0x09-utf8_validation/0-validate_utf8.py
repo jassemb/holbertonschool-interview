@@ -4,25 +4,26 @@ validate UTF-8 encoding
 """
 
 
-class Solution(object):
-    def validUtf8(self, data):
-        """
-        :type data: List[int]
-        :rtype: bool
-        """
-        count = 0
-        for c in data:
-            if count == 0:
-                if (c >> 5) == 0b110:
-                    count = 1
-                elif (c >> 4) == 0b1110:
-                    count = 2
-                elif (c >> 3) == 0b11110:
-                    count = 3
-                elif (c >> 7):
-                    return False
-            else:
-                if (c >> 6) != 0b10:
-                    return False
-                count -= 1
-        return count == 0
+def validUTF8(data):
+    """
+    :type data: List[int]
+    :rtype: bool
+    """
+    total_bytes = 0
+    first_mask = 1 << 7
+    second_mask = 1 << 6
+    for i in data:
+        another_mask = 1 << 7
+        if total_bytes == 0:
+            while another_mask & i:
+                total_bytes += 1
+                another_mask = another_mask >> 1
+            if total_bytes == 0:
+                continue
+            if total_bytes == 1 or total_bytes > 4:
+                return False
+        else:
+            if not (i & first_mask and not (i & second_mask)):
+                return False
+        total_bytes -= 1
+    return total_bytes == 0
