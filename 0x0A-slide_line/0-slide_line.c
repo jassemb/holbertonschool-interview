@@ -42,9 +42,9 @@ void slide_right(int *line, size_t size)
 {
 	size_t i, p = size - 1;
 
-	for (i = size - 1; i >= 0 && p >= 0; i--)
+	for (i = size - 1; (int)i >= 0 && (int)p >= 0; i--)
 	{
-		while (line[p] == 0 && p > 0)
+		while (line[p] == 0 && (int)p > 0)
 			p--;
 		if (line[i] == 0)
 			swap(&line[p], &line[i]);
