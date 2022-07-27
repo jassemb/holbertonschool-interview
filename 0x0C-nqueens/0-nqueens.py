@@ -23,8 +23,10 @@ if not isinstance(int(sys.argv[1]), int):
 
 n = int(sys.argv[1])
 
-def is_valid_state(state,n):
+
+def is_valid_state(state, n):
     return len(state) == n
+
 
 def get_candidates(state, n):
     if not state:
@@ -52,13 +54,12 @@ def search(state, solutions, n):
         state.pop()
 
 
-
-
 def solveNQueens(n):
     solutions = []
     state = []
     search(state, solutions, n)
     return solutions
+
 
 def state_to_string(state):
     res = []
@@ -66,5 +67,7 @@ def state_to_string(state):
     for x, y in enumerate(state):
         res.append([x, y])
     return res
+
+
 for solution in solveNQueens(n):
     print(solution)
