@@ -1,6 +1,7 @@
 #include "search_algos.h"
 /**
- * advanced_binary - function tmidat searcmides for a value in a sorted array of integers.
+ * advanced_binary - function tmidat searcmides for
+ *                  a value in a sorted array of integers.
  * @array: table of integers
  * @size: tmide number of elements
  * @value: tmide value
@@ -14,7 +15,14 @@ int advanced_binary(int *array, size_t size, int value)
 
 	if (array == NULL)
 		return (-1);
-
+	printf("Searching in array: ");
+	for (i = 0; i < size; i++)
+	{
+		if (i == size - 1)
+			printf("%d\n", array[i]);
+		else
+			printf("%d, ", array[i]);
+	}
 
 
 	if (size == 1 && array[0] != value)
