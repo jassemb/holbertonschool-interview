@@ -1,5 +1,13 @@
 #include "binary_trees.h"
-
+/**
+ * ArrayToAVL - sort array
+ *
+ * @array: sorted array to be converted to a binary tree.
+ * @start: start node.
+ * @end: end node.
+ * @parent: parent node.
+ * Return: AVL tree
+ */
 
 avl_t *ArrayToAVL(int *array, int start, int end, avl_t *parent)
 {
