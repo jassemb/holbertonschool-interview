@@ -15,7 +15,7 @@ void swap(int *a, int *b)
  */
 void heap_sort(int *array, size_t size)
 {
-	int i, last, temp;
+	int i, last;
 
 	if (!array || size <= 1)
 		return;
@@ -26,9 +26,7 @@ void heap_sort(int *array, size_t size)
 		{
 			heapify(array, (int)size, i, last);
 		}
-		temp = array[0];
-		array[0] = array[last];
-		array[last] = temp;
+		swap(&array[0], &array[last]);
 		print_array((const int *)array, size);
 	}
 }
@@ -42,7 +40,7 @@ void heap_sort(int *array, size_t size)
  */
 void heapify(int *array, int size, int parent, int last)
 {
-	int left, right, temp;
+	int left, right;
 
 	left = (parent * 2) + 1;
 	right = (parent * 2) + 2;
@@ -50,17 +48,13 @@ void heapify(int *array, int size, int parent, int last)
 		return;
 	if (right <= last && (array[right] >= array[left] && array[right] > array[parent]))
 	{
-		temp = array[parent];
-		array[parent] = array[right];
-		array[right] = temp;
+		swap(&array[parent], &array[right]);
 		print_array((const int *)array, (size_t)size);
 		heapify(array, size, right, last);
 	}
 	if ((left <= last && (right > last || array[left] > array[right])) && array[left] > array[parent])
 	{
-		temp = array[parent];
-		array[parent] = array[left];
-		array[left] = temp;
+		swap(&array[parent], &array[left]);
 		print_array((const int *)array, (size_t)size);
 		heapify(array, size, left, last);
 	}
