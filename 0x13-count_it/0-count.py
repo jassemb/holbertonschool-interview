@@ -10,7 +10,7 @@ import time
 
 
 def count_elements(request, word_list, results):
-    """ Counts number of elements """
+	""" Counts number of elements """
     for title in request['data']['children']:
         datas = title['data']['title'].split(" ")
         for i in range(len(datas)):
