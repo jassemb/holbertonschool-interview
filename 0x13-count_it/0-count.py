@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
-	Parses the title of all hot articles, and prints a sorted
-	count of given keywords (case-insensitive, delimited by spaces.
+    Parses the title of all hot articles, and prints a sorted
+    count of given keywords (case-insensitive, delimited by spaces.
 """
 import json
 import re
@@ -10,7 +10,7 @@ import time
 
 
 def count_elements(request, word_list, results):
-	""" Counts number of elements """
+    """ Counts number of elements """
     for title in request['data']['children']:
         datas = title['data']['title'].split(" ")
         for i in range(len(datas)):
