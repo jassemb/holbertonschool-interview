@@ -1,4 +1,9 @@
 #include "sort.h"
+/**
+ * swap - swap element.
+ * @a: first elemnt.
+ * @b: seconde element.
+ */
 void swap(int *a, int *b)
 {
 
@@ -46,13 +51,15 @@ void heapify(int *array, int size, int parent, int last)
 	right = (parent * 2) + 2;
 	if (parent < 0 || parent >= size - 1)
 		return;
-	if (right <= last && (array[right] >= array[left] && array[right] > array[parent]))
+	if (right <= last &&
+	(array[right] >= array[left] && array[right] > array[parent]))
 	{
 		swap(&array[parent], &array[right]);
 		print_array((const int *)array, (size_t)size);
 		heapify(array, size, right, last);
 	}
-	if ((left <= last && (right > last || array[left] > array[right])) && array[left] > array[parent])
+	if ((left <= last &&
+	(right > last || array[left] > array[right])) && array[left] > array[parent])
 	{
 		swap(&array[parent], &array[left]);
 		print_array((const int *)array, (size_t)size);
