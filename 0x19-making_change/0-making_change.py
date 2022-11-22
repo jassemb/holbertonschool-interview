@@ -15,9 +15,9 @@ def makeChange(coins, total):
         M[j]= total + 1
 
     for i in range(1, total+1):
-        if(j >= M[i]):
-            minimum = min(minimum, 1+M[j-M[i]])
-        M[j] = minimum
+        for coin in coins:
+            if i - coin >= 0:
+                M[i] = min(M[i], 1 + M[i - coin])
     return M[total] if M[total] != total + 1 else -1
 
 
