@@ -1,4 +1,9 @@
 #!/usr/bin/python3
+"""
+make change: bottom up method
+"""
+
+
 def makeChange(coins, total):
     """
     make change: bottom up method
