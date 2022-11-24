@@ -46,9 +46,11 @@ void countSort(int *array, int n, int exp)
  */
 void radix_sort(int *array, size_t size)
 {
+	int exp = 1;
+	int s;
 	int m = getMax(array, size);
-
-	for (int exp = 1; m / exp > 0; exp *= 10)
+	s = m / exp;
+	for (exp; s > 0; exp *= 10)
 	{
 		countSort(array, size, exp);
 		print_array(array, size);
