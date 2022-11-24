@@ -26,14 +26,13 @@ List *add_node_end(List **list, char *str)
 	{
 		new->next = new->prev = new;
 		*list = new;
-		return(new);
+		return (new);
 	}
 	ptr = (*list)->prev;
-	new->next = *list;
-	(*list)->prev = new;
-	new->prev = ptr->next = new;
+	ptr->next = new;
+	new->next = (*list);
 	new->prev = ptr;
-	*list = new;
+	(*list)->prev = new;
 	return (new);
 }
 
@@ -59,11 +58,16 @@ List *add_node_begin(List **list, char *str)
 	new->str = strdup(str);
 	if (new->str == NULL)
 		return (NULL);
+	if (*list == NULL)
+	{
+		new->next = new->prev = new;
+		*list = new;
+		return (new);
+	}
 	ptr = (*list)->prev;
-	new->next = *list;
-	(*list)->prev = ptr;
+	new->next = (*list);
+	new->prev = ptr;
 	(*list)->prev = ptr->next = new;
 	*list = new;
 	return (new);
-
 }
