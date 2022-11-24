@@ -71,7 +71,8 @@ void radix_sort(int *array, size_t size)
 	{
 		countSort(array, size, exp);
 		print_array(array, size);
-		printf("\n");
+		
 	}
+	printf("\n");
 	
 }
