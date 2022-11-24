@@ -24,11 +24,12 @@ void countSort(int *array, int n, int exp)
 {
 	int output[n];
 	int i, count[10] = {0};
+	int t = 1;
 
 	for (i = 0; i < n; i++)
 		count[(array[i] / exp) % 10]++;
 
-	for (i = 1; i < 10; i++)
+	for (t; i < 10; i++)
 		count[i] += count[i - 1];
 
 	for (i = n - 1; i >= 0; i--)
