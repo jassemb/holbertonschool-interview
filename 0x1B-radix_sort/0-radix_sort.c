@@ -8,9 +8,9 @@
 int getMax(int *array, int n)
 {
 	int mx = array[0];
-	int i = 1;
+	int i;
 
-	for (i; i < n; i++)
+	for (i = 1; i < n; i++)
 		if (array[i] > mx)
 			mx = array[i];
 	return (mx);
@@ -25,12 +25,11 @@ void countSort(int *array, int n, int exp)
 {
 	int output[n];
 	int i, count[10] = {0};
-	int t = 1;
 
 	for (i = 0; i < n; i++)
 		count[(array[i] / exp) % 10]++;
 
-	for (t; i < 10; i++)
+	for (i = 1; i < 10; i++)
 		count[i] += count[i - 1];
 
 	for (i = n - 1; i >= 0; i--)
@@ -48,13 +47,16 @@ void countSort(int *array, int n, int exp)
  */
 void radix_sort(int *array, size_t size)
 {
-	int exp = 1;
-	int s;
+	int exp;
 	int m = getMax(array, size);
-	s = m / exp;
-	for (exp; s > 0; exp *= 10)
+	if (!array || size < 2)
+		return;
+
+	for (exp = 1; m / exp > 0; exp *= 10)
 	{
 		countSort(array, size, exp);
 		print_array(array, size);
+		printf("\n");
 	}
+	
 }
