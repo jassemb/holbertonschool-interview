@@ -12,6 +12,9 @@ void print_array(const int *array, size_t size)
 	size_t i;
 
 	i = 0;
+	if (!array || size < 2)
+		return;
+
 	while (array && i < size)
 	{
 		if (i > 0)
