@@ -19,7 +19,7 @@ int getMax(int *array, int n)
  * countSort - to do counting sort of arr
  * @array: arry to be sorted.
  * @n: size of array
- * @exp: expectued number
+ * @div: expectued number
  */
 void countSort(int *array, int n, int div)
 {
@@ -64,6 +64,7 @@ void radix_sort(int *array, size_t size)
 {
 	int exp;
 	int m = getMax(array, size);
+
 	if (!array || size < 2)
 		return;
 
@@ -71,7 +72,5 @@ void radix_sort(int *array, size_t size)
 	{
 		countSort(array, size, exp);
 		print_array(array, size);
-		
 	}
-	
 }
