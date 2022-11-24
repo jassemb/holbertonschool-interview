@@ -8,8 +8,9 @@
 int getMax(int *array, int n)
 {
 	int mx = array[0];
+	int i = 1;
 
-	for (int i = 1; i < n; i++)
+	for (i; i < n; i++)
 		if (array[i] > mx)
 			mx = array[i];
 	return (mx);
