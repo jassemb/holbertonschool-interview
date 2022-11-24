@@ -21,24 +21,39 @@ int getMax(int *array, int n)
  * @n: size of array
  * @exp: expectued number
  */
-void countSort(int *array, int n, int exp)
+void countSort(int *array, int n, int div)
 {
-	int output[n];
-	int i, count[10] = {0};
 
-	for (i = 0; i < n; i++)
-		count[(array[i] / exp) % 10]++;
+	int *freq;
+	int *temp;
+	int init, count, u, t, f;
 
-	for (i = 1; i < 10; i++)
-		count[i] += count[i - 1];
-
-	for (i = n - 1; i >= 0; i--)
+	freq = malloc(sizeof(int) * (10));
+	if (!freq)
+		return;
+	for (init = 0; init < 10 ; init++)
+		freq[init] = 0;
+	for (count = 0; count < n; count++)
+		freq[(array[count] / div) % 10]++;
+	for (u = 1; u < 10; u++)
+		freq[u] += freq[u - 1];
+	temp = malloc(sizeof(int) * (n));
+	if (!temp)
 	{
-		output[count[(array[i] / exp) % 10] - 1] = array[i];
-		count[(array[i] / exp) % 10]--;
+		free(freq);
+		return;
 	}
-	for (i = 0; i < n; i++)
-		array[i] = output[i];
+	/* Building the temporary array. */
+	for (t = n - 1; t > -1; t--)
+	{
+		temp[freq[(array[t] / div) % 10] - 1] = array[t];
+		freq[(array[t] / div) % 10]--;
+	}
+	/* Updating the elements in array. */
+	for (f = 0; f < n; f++)
+		array[f] = temp[f];
+	free(temp);
+	free(freq);
 }
 /**
  * radix_sort - function that sorts an array of integers in ascending order
