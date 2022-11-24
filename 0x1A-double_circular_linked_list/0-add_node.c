@@ -26,7 +26,7 @@ List *add_node_end(List **list, char *str)
 	{
 		new->next = new->prev = new;
 		*list = new;
-		return;
+		return(new);
 	}
 	ptr = (*list)->prev;
 	new->next = *list;
