@@ -1,118 +1,91 @@
 #include "binary_trees.h"
 /**
- * heap_extract -  extracts the root node of a Max Binary Heap:
- * @root: binary tree
- * Return: int
+ * get_tree_size - returns the size of the tree
+ * @root: pointer to the head
+ * Return: size of the tree
+ **/
+int get_tree_size(heap_t *root)
+{
+	if (root == NULL)
+		return (0);
+	return (1 + get_tree_size(root->left) + get_tree_size(root->right));
+}
+/**
+ * swap - swaps nodes values
+ * @a: node to swap value of
+ * @b: node to swap value of
+ * Return: the first given node
+ **/
+heap_t *swap(heap_t *a, heap_t *b)
+{
+	a->n = a->n * b->n;
+	b->n = a->n / b->n;
+	a->n = a->n / b->n;
+	return (a);
+}
+/**
+ * get_last_node - returns the last node
+ * @root: pointer to the root node
+ * @size: size of the tree
+ * Return: the found node ptr
+ **/
+heap_t *get_last_node(heap_t *root, int size)
+{
+	int b_idx = 0;
+	int mask  = 0;
+
+	for (; 1 << (b_idx + 1) <= size; b_idx++)
+		;
+	for (b_idx--; b_idx >= 0; b_idx--)
+	{
+		mask = 1 << b_idx;
+		if (size & mask)
+			root = root->right;
+		else
+			root = root->left;
+	}
+	return (root);
+}
+
+/**
+ * heapify - converts the tree into a max heap tree
+ * @root: pointer to the root node
+ */
+void heapify(heap_t *root)
+{
+	heap_t *max = NULL;
+	int first = 0;
+
+	while (max || !first)
+	{
+		max = NULL;
+		first = 1;
+		if (root->left && root->left->n > root->n)
+			max = root->left;
+		if (root->right && root->right->n > root->n &&
+				(max && root->right->n > max->n))
+			max = root->right;
+		if (max)
+			root = swap(max, root);
+	}
+}
+/**
+ * heap_extract - extracts the root node of a Max Binary Heap
+ * @root:  is a double pointer to the root node of the heap
+ * Return: the value stored in the root node, otherwise 0
  */
 int heap_extract(heap_t **root)
 {
+	int max = (*root)->n;
+	int size = get_tree_size(*root);
+	heap_t *last_node = get_last_node(*root, size);
 
-	heap_t *leaf, *tmp;
-	int rootValue;
-
-	if ((*root) == NULL)
-		return (0);
-	rootValue = (*root)->n;
-	if (!(*root)->left && !(*root)->right)
-	{
-		free((*root));
-		*root = NULL;
-		return (rootValue);
-	}
-	leaf = find_leaf((*root));
-	if (leaf == NULL)
-		return (0);
-	tmp = (*root);
-	if (tmp->left)
-	{
-		tmp->left->parent = leaf;
-		leaf->left = tmp->left;
-	}
-	if (tmp->right)
-	{
-		tmp->right->parent = leaf;
-		leaf->right = tmp->right;
-	}
-	if (leaf->parent->left && leaf->parent->left == leaf)
-		leaf->parent->left = NULL;
-	else if (leaf->parent->right && leaf->parent->right == leaf)
-		leaf->parent->right = NULL;
-	leaf->parent = tmp->parent;
-	(*root) = leaf;
-	free(tmp);
-	siftDown(root);
-	return (rootValue);
-}
-/**
- * tree_depth - Used the detph of the heap
- * @root: First element in the heap.
- * Return: returns the depth of the heap.
- **/
-int tree_depth(heap_t *root)
-{
-	int left = 0;
-	int right = 0;
-
-	if (root == NULL)
-		return (0);
-
-	left = tree_depth(root->left);
-	right = tree_depth(root->right);
-
-	if (left > right)
-		return (left + 1);
+	swap(last_node, *root);
+	if (last_node->parent->left == last_node)
+		last_node->parent->left = NULL;
 	else
-		return (right + 1);
-}
-
-/**
- * find_leaf - Finds last element of the last level in the heap.
- * @root: Pointer to first element in the heap.
- * Return: return pointer to the last element.
- **/
-heap_t *find_leaf(heap_t *root)
-{
-	if (root == NULL)
-		return (NULL);
-	if (!root->right && !root->left)
-		return (root);
-
-	if (tree_depth(root->left) > tree_depth(root->right))
-		return (find_leaf(root->left));
-	if (tree_depth(root->right) > tree_depth(root->left))
-		return (find_leaf(root->right));
-	return (find_leaf(root->right));
-}
-/**
- * swap_nodes - Used to swap elements values
- * @parent: First element for swap
- * @child: Second element for swap
- **/
-void swap_nodes(heap_t *parent, heap_t *child)
-{
-	int tmp = child->n;
-
-	child->n = parent->n;
-	parent->n = tmp;
-}
-/**
- * siftDown - Used to repair the heap
- * @parent: First element of the heap
- **/
-void siftDown(heap_t **parent)
-{
-	heap_t *target = (*parent);
-
-	while ((target->left && target->n < target->left->n) ||
-		   (target->right && target->n < target->right->n))
-	{
-		if (target->right && target->left)
-			target = target->left->n > target->right->n ? target->left : target->right;
-		if (target->right && target->right->n > target->n)
-			target = target->right;
-		else if (target->left && target->left->n > target->n)
-			target = target->left;
-
-		swap_nodes(target->parent, target);
-	}
+		last_node->parent->right = NULL;
+	free(last_node);
+	heapify(*root);
+	return (max);
 }
