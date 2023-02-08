@@ -5,19 +5,17 @@ calculate the land Perimeter
 
 
 def island_perimeter(grid):
-    """
-    :type grid: List[List[int]]
-    :rtype: int
-    """
-    island = 0
-    neighbor = 0
+    m, n, Perimeter = len(grid), len(grid[0]), 0
 
-    for y in range(len(grid)):
-        for x in range(len(grid[y])):
-            if grid[y][x] == 1:
-                island = island + 1
-                if x < len(grid[y]) - 1 and grid[y][x + 1] == 1:
-                    neighbor = neighbor + 1
-                if y < len(grid) - 1 and grid[y + 1][x] == 1:
-                    neighbor = neighbor + 1
-    return (island * 4 - 2 * neighbor)
+    for i in range(m):
+        for j in range(n):
+            Perimeter += 4 * grid[i][j]
+            if i > 0:
+                Perimeter -= grid[i][j] * grid[i - 1][j]
+            if i < m - 1:
+                Perimeter -= grid[i][j] * grid[i + 1][j]
+            if j > 0:
+                Perimeter -= grid[i][j] * grid[i][j - 1]
+            if j < n - 1:
+                Perimeter -= grid[i][j] * grid[i][j + 1]
+    return Perimeter
