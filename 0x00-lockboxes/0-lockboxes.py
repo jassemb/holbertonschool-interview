@@ -1,4 +1,9 @@
 #!/usr/bin/python3
+"""
+    Box opener method.
+"""
+
+
 def canUnlockAll(boxes):
     if type(boxes) is not list and len(boxes)<0:
         return False
