@@ -3,30 +3,23 @@
     Box opener method.
 """
 
+def concat(A,B):
+    res=[]
+    for w in B:
+        res+=A[w]
+    return res
 
 def canUnlockAll(boxes):
-    if type(boxes) is not list and len(boxes)<0:
-        return False
-    for box in boxes:
-        if type(box) is not list:
-            return False
-    
-    keys=[0]
-    for key in keys:
-            if type(key) is not int and key<0:
-                return False
-            else:              
-                #print(key)
-                for bk in boxes[key]:
-                    # print("===")                
-                     #print(boxes[key])
+    index = 0
+    total = list(set(boxes[0])|{0})
+    sum = True
+    while sum:
+        sum=False
+        for j in concat(boxes,total[index:]):
+            if j not in total:
+                total.append(j)
+                index = index + 1
+                sum=True
+    print(total)
+    return len(total) == len(boxes)
 
-                    if bk not in keys and bk < len(boxes):
-                        keys.append(bk)
-
-
-    if len(keys)== len(boxes):
-
-        return True
-    else :
-        return False
