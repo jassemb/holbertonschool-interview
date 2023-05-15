@@ -5,19 +5,19 @@
 
 
 def canUnlockAll(boxes):
-    test = [0]
+    l=[]
+    X=len(boxes)
+    for i in boxes:
+        if len(i)==0 and i is not boxes[X-1]: #### if the empty list is not the last list in the boxes (in the middle) [case of third]
+            return False
+
+        for j in i:
+            l.append(j)  #creation  de la  list: change the list of list into a simple list
 
 
-
-    for id, box in enumerate(boxes):
-        if not box:
-            continue
-        for k in box:
-            if k not in test and k != id and k<len(boxes):
-                test.append(k)
-    
-    
-    
-    if len(test) == len(boxes):
-        return True
-    return False
+    #print(l) affichage
+    for index, keys in enumerate(boxes):
+        if index in l or index<X-1:
+            return True
+        else:
+            return False
