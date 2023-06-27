@@ -1,23 +1,12 @@
 #!/usr/bin/python3
-"""
-    Box opener method.
-"""
-
-
+#!/usr/bin/python3
 def canUnlockAll(boxes):
-    l=[]
-    X=len(boxes)
-    for i in boxes:
-        if len(i)==0 and i is not boxes[X-1]: #### if the empty list is not the last list in the boxes (in the middle) [case of third]
-            return False
-
-        for j in i:
-            l.append(j)  #creation  de la  list: change the list of list into a simple list
-
-
-    #print(l) affichage
-    for index, keys in enumerate(boxes):
-        if index in l or index<X-1:
-            return True
-        else:
-            return False
+    j=0
+    while(j!=len(boxes)-1):
+            for i in range (j+1,len(boxes)):
+                if (i in boxes[j]):
+                    j+=1
+                else:
+                    return(False)
+                break
+    return(True)
