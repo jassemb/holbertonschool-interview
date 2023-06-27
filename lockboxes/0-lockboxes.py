@@ -1,12 +1,11 @@
 #!/usr/bin/python3
 def canUnlockAll(boxes):
-
-
-    boxes = []
-    keys = []
-    for i in range(1, n):
-        boxes[0] == "unlocked"
-        keys = []
-        for j in range(1, n):
-            keys.append(j)
-            boxes.append(keys)
+    j = 0
+    while (j != len(boxes)-1):
+        for i in range(j+1, len(boxes)):
+            if (i in boxes[j]):
+                j += 1
+            else:
+                return (False)
+            break
+    return (True)
