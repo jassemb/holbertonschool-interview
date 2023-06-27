@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-#!/usr/bin/python3
 def canUnlockAll(boxes):
     j=0
     while(j!=len(boxes)-1):
