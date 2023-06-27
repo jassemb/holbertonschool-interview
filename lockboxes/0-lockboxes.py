@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-	canUnlockAll : test if all boxes can be opened
+canUnlockAll : test if all boxes can be opened
 """
 
 
